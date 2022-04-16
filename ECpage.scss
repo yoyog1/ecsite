@@ -1,0 +1,253 @@
+@charset "UTF-8";
+*{
+box-sizing: border-box;
+list-style-type:none;
+text-decoration: none;
+color: #333;
+padding: 0;
+margin: 0;
+    a{
+        color:#333;
+        &:hover{
+            color:rgba(#333,.5)
+        }
+    }
+    font-family: arial;
+    p,li,td,th{
+        font-size: 12px;
+    }
+    
+}
+
+@mixin flex-row(){
+display: flex;
+flex-flow: row  ;
+};
+@mixin flex-clm(){
+display: flex;
+flex-flow: column  ;
+};
+@mixin pos-absl (){
+position: absolute;
+top: 0;
+left: 0;
+};
+@mixin pos-rltv (){
+position: relative;
+top:top;
+left:left;
+};
+
+html{body{
+    $area-between:60px;
+    $margin-from-main:50px;
+            header{
+                margin-bottom: $margin-from-main;
+                .container{
+                    text-align: center;
+                    margin: 0 auto;
+                    max-width: 1100px+$area-between;
+                    width: 100%;
+                    p{
+                        font-size: 30px;
+                        line-height: 3em;
+                        font-family: arial black;
+                    }
+                    nav{
+                        margin: 0 30px;
+                        // width: 800px;
+                        @include flex-row();
+                        justify-content: space-between;
+                        border-bottom: 1px solid #bbb;
+                        ul{
+                        &:nth-child(1){
+                            @include flex-row();
+                        }
+                        &:nth-child(2){
+                            @include flex-row();
+                        }
+                            li{
+                                line-height: 3em;
+                                margin: 0 10px;
+                                &:nth-child(1){
+                                    margin-left: 0;
+                                }
+                                &:last-child{
+                                    margin-right: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            main{
+                $top-space:570px;
+                
+                // ／タブレット＼
+                @media (max-width: 768px) {
+                    // $top-space:400px;
+                }
+                // ／スマホ＼
+                @media (max-width: 640px) {
+                    // $top-space:;
+                }
+                @include flex-row();
+                justify-content: center;
+                >div.contents{
+                    max-width: 1100px;
+                    width: 100%;                
+                    $thumb-space:$top-space/4;
+                    gap: $margin-from-main;
+                    margin: 0 30px;
+                    // ＼ パソコン ／
+                    @media (min-width: 960px) {
+                        @include flex-row();
+                        justify-content: space-between;
+                        height: $top-space+$thumb-space;
+                    }
+                    // ／タブレット＼
+                    @media (max-width: 959px) {
+                        @include flex-clm();
+                        // $top-space:400px;
+                    }
+
+                    >div.imgs-area{
+                        background: #000;
+                        
+                        // ＼ パソコン ／
+                        @media (min-width: 769px) {
+                            width: $top-space;
+                        }
+                        
+                        margin: 0 auto;
+                        
+
+                        // トップ                        
+                        ul.top{
+                            @include flex-clm();
+                            overflow: hidden;
+                            height: $top-space;
+                            width: $top-space;
+                            
+                            li{img{
+                                    height: $top-space;
+                                    width: $top-space;
+                                    object-fit: cover;
+                                    
+
+                                }
+                                &:nth-child(2){
+                                    img{
+                                        filter: brightness(1.1);
+                                    }
+                                }
+                            }
+                        }
+                        
+                        // サムネ
+                        ul.thumb{
+                            @include flex-row();
+                            // overflow: hidden;
+                            height: $thumb-space;
+                            // ここはトップスペース
+                            width: $top-space;
+                            
+                            
+                            li{
+                                img{
+                                    width: $thumb-space;
+                                    height: $thumb-space;
+                                    object-fit: cover;
+                                    
+                                }
+                            }
+                        }
+                        ul{}
+   
+                    }
+                    >div.text-area{
+                        
+
+                        @include flex-clm();
+                        justify-content: space-between;
+                        flex-wrap: nowrap;
+                        // ＼ パソコン ／
+                        @media (min-width: 960px) {
+                            // margin-left: $area-between;
+                        }
+                        // ／タブレット＼
+                        @media (max-width: 959px) {
+                            // margin: 0 30px;
+                        }
+                        // ／スマホ＼
+                        @media (max-width: 640px) {
+                        }
+                        
+                        // 01
+                        >div.Description{
+                            >h1{
+                                border-top: 1px #bbb solid;
+                                border-bottom: 1px #bbb solid;
+                                font-size: 1.2em;
+                                line-height: 3em;   
+                            }
+                            >p{
+                                width: 100%;
+                                // white-space: normal;
+                                overflow-wrap:break-word;
+                                line-height: 2em;
+                                margin: 20px 0;
+                            }
+                        }
+                        // 02
+                        >table{
+                            width: 100%;
+                            text-align: center;
+                            td, th{
+                                padding: 10px;
+                            }
+                        }
+                        >table.Choices{
+                                    label{
+                                        width: 100%;
+                                        input{
+                                            width: 100%;
+                                            &:hover{
+                                                cursor:crosshair;
+                                            }
+                                        }
+                                    }
+                        }
+                        // 03
+                        >div.button{
+                            background: #4B4B4B;
+                            text-align: center;
+                            margin: 0 0 40px 0;
+                            &:hover{
+                                cursor: pointer;
+                            }
+                            a{
+                                color: #fff;
+                                line-height: 3em;  
+                            }
+                        }
+                        // 04
+                        >table.detail{
+                            // width: 100%;
+                            // text-align: center;
+                            th{
+                                background: #eee;
+                            }
+                            
+
+                        }
+                    }
+                }
+            }
+            footer{               
+                margin:$margin-from-main auto 0 ;
+                p{
+                    text-align: center;
+                line-height: 3em;}
+            }
+}}
